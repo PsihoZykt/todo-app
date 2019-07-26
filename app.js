@@ -1,4 +1,5 @@
 const express = require('express');
+const cool = require('cool-ascii-faces');
 
 const app = express();
 // Import Mongoose
@@ -13,7 +14,9 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 // use it before all route definitions
 app.use(cors({ origin: 'http://localhost:3000' }));
 app.use('/api', apiRoutes);
-
+app.get('/cool', (req, res) => {
+  res.send(cool());
+});
 // Connect to Mongoose and set connection variable
 // Deprecated: mongoose.connect('mongodb://localhost/resthub');
 mongoose.connect(
