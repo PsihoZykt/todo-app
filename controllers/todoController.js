@@ -39,9 +39,29 @@ exports.new = (req, res) => {
 };
 // Handle view contact info
 exports.view = (req, res) => {
-  Todo.findById(
-    req.params.todo_id,
-    (err, todo) => {
+  Todo.findById(req.params.todo_id, (err, todo) => {
+    if (err) {
+      res.status(400).send({
+        status: 'error',
+        message: err,
+      });
+    } else {
+      res.status(200).send({
+        status: 'success',
+        message: 'Todo retrieved successfully',
+        data: todo,
+      });
+    }
+  });
+};
+// Handle update contact info
+exports.update = function (req, res) {
+  Todo.findById(req.params.todo_id, (err, todo) => {
+    todo = getTodo(req, todo);
+    console.log(req.body.task);
+
+    // save the contact and check for errors
+    todo.save((err) => {
       if (err) {
         res.status(400).send({
           status: 'error',
@@ -50,38 +70,12 @@ exports.view = (req, res) => {
       } else {
         res.status(200).send({
           status: 'success',
-          message: 'Todo retrieved successfully',
+          message: 'Todo posted successfully',
           data: todo,
         });
       }
-    },
-  );
-};
-// Handle update contact info
-exports.update = function(req, res) {
-  Todo.findById(
-    req.params.todo_id,
-    (err, todo) => {
-      todo = getTodo(req, todo);
-      console.log(req.body.task);
-
-      // save the contact and check for errors
-      todo.save((err) => {
-        if (err) {
-          res.status(400).send({
-            status: 'error',
-            message: err,
-          });
-        } else {
-          res.status(200).send({
-            status: 'success',
-            message: 'Todo posted successfully',
-            data: todo,
-          });
-        }
-      });
-    },
-  );
+    });
+  });
 };
 // Handle delete contact
 exports.delete = (req, res) => {

@@ -1,16 +1,15 @@
 // api-routes.js
 // Initialize express router
-let router = require('express').Router();
+const router = require('express').Router();
 // Set default API response
-router.get('/', function(req, res) {
+router.get('/', (req, res) => {
   res.json({
     status: 'API Its Working',
-    message:
-      'Welcome to RESTHub crafted with love!',
+    message: 'Welcome to RESTHub crafted with love!',
   });
 });
 // Import todo controller
-var todoController = require('./controllers/todoController');
+const todoController = require('./controllers/todoController');
 // todo routes
 router
   .route('/todos')

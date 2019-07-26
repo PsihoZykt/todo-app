@@ -1,7 +1,7 @@
 // todoModel.js
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 // Setup schema
-var todoSchema = mongoose.Schema({
+const todoSchema = mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -25,10 +25,7 @@ var todoSchema = mongoose.Schema({
   ],
 });
 // Export Todo model
-var Todo = (module.exports = mongoose.model(
-  'todo',
-  todoSchema,
-));
-module.exports.get = function(callback, limit) {
+const Todo = (module.exports = mongoose.model('todo', todoSchema));
+module.exports.get = function (callback, limit) {
   Todo.find(callback).limit(limit);
 };
