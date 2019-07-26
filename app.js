@@ -2,7 +2,7 @@ const express = require('express');
 const cool = require('cool-ascii-faces');
 
 const LOCALHOST_URL = 'http://localhost:3000';
-const HEROKU_URL = 'https://psihozykt-todo-app-back.herokuapp.com/api/todos';
+const HEROKU_URL = 'https://glacial-cove-89186.herokuapp.com/';
 const app = express();
 // Import Mongoose
 const mongoose = require('mongoose');
