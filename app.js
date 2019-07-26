@@ -2,7 +2,7 @@ const express = require('express');
 const cool = require('cool-ascii-faces');
 
 const LOCALHOST_URL = 'http://localhost:3000';
-const HERIKO_URL = 'https://psihozykt-todo-app-back.herokuapp.com/';
+const HEROKU_URL = 'https://psihozykt-todo-app-back.herokuapp.com/api/todos';
 const app = express();
 // Import Mongoose
 const mongoose = require('mongoose');
@@ -14,7 +14,7 @@ const apiRoutes = require('./api-routes');
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 // use it before all route definitions
-app.use(cors({ origin: HERIKO_URL }));
+app.use(cors({ origin: HEROKU_URL }));
 app.use('/api', apiRoutes);
 app.get('/cool', (req, res) => {
   res.send(cool());
