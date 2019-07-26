@@ -28,6 +28,6 @@ const db = mongoose.connection;
 if (!db) console.log('Error connecting db');
 else console.log('Db connected successfully');
 
-app.listen(3005, () => {
-  console.log('Example app listening on port 3005!');
+app.listen(process.env.PORT || 3005, () => {
+  console.log('Express server listening on port %d in %s mode', (process.env.PORT || 3005), app.settings.env);
 });
