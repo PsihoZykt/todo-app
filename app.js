@@ -14,7 +14,13 @@ const apiRoutes = require('./api-routes');
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 // use it before all route definitions
-app.use(cors({ origin: HEROKU_URL }));
+// app.use(cors({ origin: HEROKU_URL }));
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, PUT, POST');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
 app.use('/api', apiRoutes);
 app.get('/cool', (req, res) => {
   res.send(cool());
