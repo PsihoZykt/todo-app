@@ -1,6 +1,9 @@
 // api-routes.js
 // Initialize express router
 const router = require('express').Router();
+// Import todo controller
+const todoController = require('./controllers/todoController');
+// todo routes
 // Set default API response
 router.get('/', (req, res) => {
   res.json({
@@ -8,9 +11,7 @@ router.get('/', (req, res) => {
     message: 'Welcome to RESTHub crafted with love!',
   });
 });
-// Import todo controller
-const todoController = require('./controllers/todoController');
-// todo routes
+
 router
   .route('/todos')
   .get(todoController.index)
