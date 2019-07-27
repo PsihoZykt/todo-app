@@ -9,8 +9,25 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 // Import routes
-const apiRoutes = require('./api-routes');
+// необходим для управления сессиями
+const session = require('express-session');
+// хранение идентификаторов сессий в базе данных Mongo
+const MongoStore = require('connect-mongo')(session);
 
+
+const apiRoutes = require('./api-routes');
+const usersRoutes = require('./users-routes');
+
+
+app.use(session({
+  secret: 'i need more beers',
+  resave: false,
+  saveUninitialized: false,
+  // Место хранения можно выбрать из множества вариантов, это и БД и файлы и Memcached.
+  store: new MongoStore({
+    url: 'mongodb+srv://psihoz_ykt:Pp89241735187@cluster0-rp2fj.gcp.mongodb.net/todo-app?retryWrites=true&w=majority',
+  }),
+}));
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 // use it before all route definitions
@@ -22,6 +39,8 @@ app.use((req, res, next) => {
   next();
 });
 app.use('/api', apiRoutes);
+app.use('/users', usersRoutes);
+
 app.get('/cool', (req, res) => {
   res.send(cool());
 });

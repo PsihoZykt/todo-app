@@ -7,7 +7,6 @@ const todoController = require('./controllers/todoController');
 // Set default API response
 
 
-
 router.get('/', (req, res) => {
   res.json({
     status: 'API Its Working',
