@@ -12,7 +12,7 @@ exports.createUser = (userData) => {
   const user = {
     username: userData.username,
     email: userData.email,
-    password: hash(userData.password),
+    password: hash((userData.password)),
   };
   console.log(user);
 
@@ -25,8 +25,6 @@ exports.getUser = id => User.findOne(id);
 exports.checkUser = userData => User
   .findOne({ email: userData.email })
   .then((doc) => {
-    console.log(`doc is ${doc}`);
-    console.log(userData);
     if (doc.password === hash(userData.password)) {
       console.log('User password is ok');
       return Promise.resolve(doc);

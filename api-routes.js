@@ -20,7 +20,7 @@ router
   .get(todoController.index)
   .post(todoController.new);
 router
-  .route('/todos/:todo_id')
+  .route('/todos/:id')
   //   .get(todoController.view)
   //   .patch(todoController.update)
   .put(todoController.update)

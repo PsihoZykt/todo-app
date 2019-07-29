@@ -1,5 +1,7 @@
 // todoModel.js
 const mongoose = require('mongoose');
+
+const { Schema } = mongoose;
 // Setup schema
 const todoSchema = mongoose.Schema({
   name: {
@@ -23,6 +25,10 @@ const todoSchema = mongoose.Schema({
       },
     },
   ],
+  uid: {
+    type: Schema.Types.ObjectId,
+    required: false,
+  },
 });
 // Export Todo model
 const Todo = (module.exports = mongoose.model('todo', todoSchema));

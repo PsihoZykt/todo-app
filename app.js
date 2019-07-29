@@ -8,6 +8,11 @@ const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+
+const corsOptions = {
+  origin: true,
+  credentials: true,
+};
 // Import routes
 // необходим для управления сессиями
 const session = require('express-session');
@@ -30,14 +35,8 @@ app.use(session({
 }));
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
-// use it before all route definitions
-// app.use(cors({ origin: HEROKU_URL }));
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
+
+app.use(cors(corsOptions));
 app.use('/api', apiRoutes);
 app.use('/users', usersRoutes);
 
