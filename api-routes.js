@@ -6,14 +6,13 @@ const todoController = require('./controllers/todoController');
 // todo routes
 // Set default API response
 
-
 router.get('/', (req, res) => {
   res.json({
     status: 'API Its Working',
     message: 'Welcome to RESTHub crafted with love!',
   });
 });
-
+// GET http://localhost:3005/api/todos
 
 router
   .route('/todos')

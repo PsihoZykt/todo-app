@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 // Setup schema
 const todoSchema = mongoose.Schema({
+  id: { type: mongoose.Schema.ObjectId },
   name: {
     type: String,
     required: true,

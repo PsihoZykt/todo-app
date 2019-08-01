@@ -12,7 +12,8 @@ router.post('/login', (req, res, next) => {
     return;
   }
   console.log(req.body);
-  api.checkUser(req.body)
+  api
+    .checkUser(req.body)
     .then((user) => {
       if (user) {
         req.session.user = user;
@@ -27,8 +28,6 @@ router.post('/login', (req, res, next) => {
       } else {
         console.log('user is not vald');
         res.status(500).send({ message: 'Error in check user' });
-
-        return next(error);
       }
     })
     .catch(error => next(error));
@@ -36,11 +35,11 @@ router.post('/login', (req, res, next) => {
   return null;
 });
 
-
 router.post('/', (req, res) => {
   console.log('User create process');
   console.log(req.body);
-  api.createUser(req.body)
+  api
+    .createUser(req.body)
     .then((result) => {
       console.log(`result in createUser ${result}`);
       res.status(200).send({
@@ -74,6 +73,5 @@ router.get('/auth', (req, res, next) => {
     res.status(400).send({ message: 'Need to log in' });
   }
 });
-
 
 module.exports = router;

@@ -1,23 +1,27 @@
 // todoController.js
 // Import todo  model
+const { ObjectID } = require('mongodb'); // or ObjectID
 const getTodo = require('./util/todo');
 const Todo = require('../models/todoModel');
-
 // Handle index actions
 exports.index = (req, res) => {
+  // let userId = null;
+  // if (req.session.user) userId = req.session.user._id;
   console.log('index');
   Todo.find({ uid: req.session.user._id }, (err, todos) => {
+    console.log(todos);
     if (err) {
       res.status(400).send({
         status: 'error',
         message: err,
       });
+    } else {
+      res.status(200).send({
+        status: 'success',
+        message: 'Todos retrieved successfully',
+        data: todos,
+      });
     }
-    res.status(200).send({
-      status: 'success',
-      message: 'Todos retrieved successfully',
-      data: todos,
-    });
   });
 };
 // Handle create contact actions
@@ -59,47 +63,49 @@ exports.view = (req, res) => {
     }
   });
 };
+
+// TODO : UPDATE OTHER FIND ONE AND UPDATE
+// THEY RETURN OLD DOCUMENT
 // Handle update contact info
 exports.update = (req, res) => {
   const todo = req.body.task;
-
-  Todo.updateMany({ isActive: true }, { $set: { isActive: false } }, () => {
-    Todo.findByIdAndUpdate(req.params.id, { $set: { isActive: true, subTasks: todo.subTasks } }, (err, resp) => {
-      console.log(todo.subTasks);
-      console.log('------------');
-      console.log(resp);
-
-      if (err) {
-        res.status(400).send({
-          status: 'error',
-          message: err,
-        });
-      } else {
-        res.status(200).send({
-          status: 'success',
-          message: 'Todo updated successfully',
-          data: resp,
-        });
-      }
-    });
+  Todo.updateMany({}, { $set: { isActive: false } }, (err, resps) => {
+    Todo.findOneAndUpdate(
+      { _id: req.params.id },
+      { $set: { isActive: true, subTasks: todo.subTasks } },
+      { new: true },
+      (err, resp) => {
+        if (err) {
+          res.status(400).send({
+            status: 'error',
+            message: err,
+          });
+        } else {
+          res.status(200).send({
+            status: 'success',
+            message: 'Todo updated successfully',
+            data: resp,
+          });
+        }
+      },
+    );
   });
 };
 // Handle delete contact
 exports.delete = (req, res) => {
   console.log('delete');
-  Todo.remove({ _id: req.params.id },
-    (err, todo) => {
-      if (err) {
-        res.status(400).send({
-          status: 'error',
-          message: err,
-        });
-      } else {
-        res.status(200).send({
-          status: 'success',
-          message: 'Todo deleted successfully',
-          data: todo,
-        });
-      }
-    });
+  Todo.remove({ _id: req.params.id }, (err, todo) => {
+    if (err) {
+      res.status(400).send({
+        status: 'error',
+        message: err,
+      });
+    } else {
+      res.status(200).send({
+        status: 'success',
+        message: 'Todo deleted successfully',
+        data: todo,
+      });
+    }
+  });
 };
