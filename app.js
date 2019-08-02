@@ -39,7 +39,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 app.use(cors(corsOptions));
 app.use('/api', apiRoutes);
-app.use('/users', usersRoutes);
+app.use('/api', usersRoutes);
 
 app.get('/cool', (req, res) => {
   res.send(cool());

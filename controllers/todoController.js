@@ -1,6 +1,5 @@
 // todoController.js
 // Import todo  model
-const { ObjectID } = require('mongodb'); // or ObjectID
 const getTodo = require('./util/todo');
 const Todo = require('../models/todoModel');
 // Handle index actions
@@ -64,9 +63,7 @@ exports.view = (req, res) => {
   });
 };
 
-// TODO : UPDATE OTHER FIND ONE AND UPDATE
-// THEY RETURN OLD DOCUMENT
-// Handle update contact info
+
 exports.update = (req, res) => {
   const todo = req.body.task;
   Todo.updateMany({}, { $set: { isActive: false } }, (err, resps) => {
