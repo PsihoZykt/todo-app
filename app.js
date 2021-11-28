@@ -1,9 +1,16 @@
 const express = require('express');
 const cool = require('cool-ascii-faces');
+const path = require('path');
 
-const LOCALHOST_URL = 'http://localhost:3000';
-const HEROKU_URL = 'https://glacial-cove-89186.herokuapp.com/';
+
 const app = express();
+if (process.env.NODE_ENV === 'production') {
+  app.use('/', express.static(path.join(__dirname, 'client', 'build')));
+  app.get('*', (req, res) => {
+    const index = path.join(__dirname, 'client', 'build', 'index.html');
+    res.sendFile(index);
+  });
+}
 // Import Mongoose
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -52,8 +59,11 @@ mongoose.connect(
 );
 const db = mongoose.connection;
 // Added check for DB connection
-if (!db) console.log('Error connecting db');
-else console.log('Db connected successfully');
+if (!db) {
+  console.log('Error connecting db');
+} else {
+  console.log('Db connected successfully');
+}
 
 app.listen(process.env.PORT || 3005, () => {
   console.log(

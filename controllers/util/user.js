@@ -6,24 +6,27 @@ const hash = text => crypto
   .update(text)
   .digest('base64');
 
-const createUser = (userData) => {
+
+exports.createUser = (userData) => {
   const user = {
     username: userData.username,
     email: userData.email,
     password: hash(userData.password),
   };
-  console.log(user);
-
   return new User(user).save();
 };
-module.exports = createUser;
 
-const checkUser = userData => User.findOne({ email: userData.email }).then((doc) => {
-  if (doc.password === hash(userData.password)) {
-    console.log('User password is ok');
-    return Promise.resolve(doc);
-  }
-  return Promise.reject('Password not found');
-});
-
-module.exports = checkUser;
+// Check if entered password is correct
+exports.checkUser = userData => User.findOne({ email: userData.email })
+  .then((user) => {
+    if (!user) return Promise.reject('There is no user with this credentials');
+    if (user.password === hash(userData.password)) {
+      console.log('User password is ok');
+      return Promise.resolve(user);
+    }
+    return Promise.reject('Password not found');
+  })
+  .catch((err) => {
+    console.log('user.js checkUser: ' + err);
+    throw err;
+  });

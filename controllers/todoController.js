@@ -6,7 +6,6 @@ const Todo = require('../models/todoModel');
 exports.index = (req, res) => {
   // let userId = null;
   // if (req.session.user) userId = req.session.user._id;
-  console.log('index');
   Todo.find({ uid: req.session.user._id }, (err, todos) => {
     console.log(todos);
     if (err) {

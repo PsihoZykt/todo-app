@@ -1,0 +1,19 @@
+.wrapper {
+    margin: 2px;
+}
+
+.undoneTask {
+    background-color:white
+}
+
+.done{
+    background-color: gainsboro;
+    text-decoration: line-through;
+    font-style: italic;
+    
+}
+.task { 
+    border-color: #007bff;
+    border-style:  solid;
+    border-width: 1px
+}

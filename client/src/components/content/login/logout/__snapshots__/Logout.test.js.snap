@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Link should render correctly 1`] = `
+<span
+  onClick={[Function]}
+  role="button"
+  tabIndex={0}
+>
+  Logout
+</span>
+`;
+
+exports[`Link should render correctly 2`] = `
+<span
+  onClick={[Function]}
+  role="button"
+  tabIndex={0}
+>
+  Logout
+</span>
+`;
+
+exports[`Logout should render correctly 1`] = `
+<span
+  onClick={[Function]}
+  role="button"
+  tabIndex={0}
+>
+  Logout
+</span>
+`;
+
+exports[`Logout should render correctly 2`] = `
+<span
+  onClick={[Function]}
+  role="button"
+  tabIndex={0}
+>
+  Logout
+</span>
+`;
+
+exports[`test onClick handler 1`] = `
+<span
+  onClick={[Function]}
+  role="button"
+  tabIndex={0}
+>
+  Logout
+</span>
+`;
+
+exports[`test onClicl handler 1`] = `
+<span
+  onClick={[Function]}
+  role="button"
+  tabIndex={0}
+>
+  Logout
+</span>
+`;
+
+exports[`test onClicl handler 2`] = `
+<span
+  onClick={[Function]}
+  role="button"
+  tabIndex={0}
+>
+  Logout
+</span>
+`;
