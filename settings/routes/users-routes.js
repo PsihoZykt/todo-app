@@ -1,6 +1,6 @@
 // Initialize express router
 const router = require('express').Router();
-const userController = require('./controllers/userController');
+const userController = require('../../controllers/userController');
 
 router.route('/auth').get(userController.auth);
 router.route('/logout').delete(userController.logout);
