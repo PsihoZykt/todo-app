@@ -5,9 +5,8 @@ import s from './task.module.css';
 import { getTaskClass } from './util';
 
 const Task = props => {
-  const { task } = props;
-  const { children } = props;
-  const [onTaskClick, onTaskRemoved] = children;
+  const { task, onTaskClick, onTaskRemoved } = props;
+  console.log(props)
   return (
     <div className={s.wrapper}>
       <li>

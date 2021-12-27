@@ -1,11 +1,10 @@
 import React from 'react';
 import LoginForm from './LoginForm';
 import { connect } from 'react-redux';
-import { withRouter, Redirect } from 'react-router-dom';
-import { getTasks } from '../../../redux/navReducer';
+import { withRouter } from 'react-router-dom';
+import { useAlert } from 'react-alert';
 import { login } from '../../../redux/authReducer';
 import s from './login.module.css';
-import withAuth from '../../../hoc/withAuth';
 
 
 const Login = (props) => {
@@ -14,7 +13,7 @@ const Login = (props) => {
       <LoginForm onSubmit={props.onSubmit}/>
       <GoToRegisterPage history={props.history}/>
     </div>
-  )
+  );
 };
 const GoToRegisterPage = props => {
   return (
@@ -25,30 +24,33 @@ const GoToRegisterPage = props => {
     </div>
   );
 };
-const LoginWrapper = (props) => {
-  // if (props.isAuth) return <Redirect to="/"/>;
+const LoginContainer = (props) => {
+  const alert = useAlert();
   const onSubmit = ({
     username,
     email,
     password
-  }) => props.login((username = ''), email, password)
-    .then(() => props.getTasks())
-    .then(() => props.history.push('/tasks'))
-    .catch((err) => {
-      // return <Redirect to="/login"/>;
-    });
+  }) => {
+    props.login((username = ''), email, password)
+      .then((res) => {
+        if (res.user) {
+          alert.success(res.message);
+          props.history.push('/tasks');
+        } else {
+          alert.error(res.message);
+        }
+      })
+      .catch((err) => {
+        alert.error(err);
+      });
+  };
   return <Login onSubmit={onSubmit} {...props} />;
 };
-// const mapStateToProps = state => ({
-//   isAuth: state.authReducer.isAuth,
-// });
 
 export default connect(
-  // mapStateToProps,
   null,
   {
     login,
-    getTasks
   },
-)((withRouter(LoginWrapper)));
+)((withRouter(LoginContainer)));
 

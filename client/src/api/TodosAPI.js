@@ -5,11 +5,10 @@ const APPLICATION_JSON = 'application/json';
 const TodosAPI = {
   getAllTodos() {
     return instance
-      .get('/api/todos')
+      .get('/api/todo')
       .then(response => response.data)
       .then(data => data.data.map(todo => ({
         name: todo.name,
-        isActive: todo.isActive,
         subTasks: todo.subTasks.map(subTask => ({
           label: subTask.label,
           id: subTask._id,
@@ -23,7 +22,7 @@ const TodosAPI = {
   postTodo(task) {
     return instance
       .post(
-        '/api/todos',
+        '/api/todo',
         { task },
         {
           headers: {
@@ -51,7 +50,7 @@ const TodosAPI = {
   editTask(task) {
     return instance
       .put(
-        `/api/todos/${task.id}`,
+        `/api/todo/${task.id}`,
         { task },
         {
           headers: {

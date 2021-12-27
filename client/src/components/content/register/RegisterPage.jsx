@@ -1,35 +1,36 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
-import { Field, reduxForm } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { login, createUser } from '../../../redux/authReducer';
+import {  createUser } from '../../../redux/authReducer';
 import s from './register.module.css';
 import RegisterForm from './RegisterForm';
-const RegisterPageWrapper = props => {
+import { useAlert } from 'react-alert';
+
+const RegisterPageContainer = props => {
+  let alert = useAlert()
   const onSubmit = formData => {
     props
       .createUser(formData.username, formData.email, formData.password)
-      .then(data => {
-        if (data.status === 200) {
-          return props
-            .login(formData.username, formData.email, formData.password)
-            .then(() => props.history.push('/'));
+      .then((res) => {
+        console.log(res)
+        if(res.user) {
+          alert.success(res.message)
+          props.history.push('/')
+        } else {
+          alert.error(res.message)
         }
-        throw new Error('Registration error');
-      })
-      .catch(err => {
-        console.log(err)
       });
+
   };
-  return  <RegisterPage  onSubmit={onSubmit} {...props} />
-}
+  return <RegisterPage onSubmit={onSubmit} {...props} />;
+};
 const RegisterPage = props => {
 
   return (
     <div className={`${s.registerWrapper}`}>
       register
-      <RegisterForm onSubmit={props.onSubmit} />
+      <RegisterForm onSubmit={props.onSubmit}/>
       <span role="link" tabIndex={0} onClick={() => props.history.push('/login')}>
         back to login{' '}
       </span>
@@ -39,5 +40,7 @@ const RegisterPage = props => {
 
 export default connect(
   null,
-  { login, createUser },
-)(withRouter(RegisterPageWrapper));
+  {
+    createUser
+  },
+)(withRouter(RegisterPageContainer));

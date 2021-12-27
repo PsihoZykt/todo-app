@@ -1,26 +1,28 @@
-import React from 'react';
-import { Redirect } from 'react-router-dom';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Login from '../components/content/login/Login';
+import { checkAuth } from '../redux/authReducer';
 
 const mapStateToPropsForRedirect = state => ({
   isAuth: state.authReducer.isAuth,
 });
 
 const withAuthRedirect = Component => {
+
   // eslint-disable-next-line react/prefer-stateless-function
-  class RedirectComponent extends React.Component {
-    render() {
-      const { isAuth } = this.props;
+   let RedirectComponent = (props) => {
+     useEffect(() => {
+       props.checkAuth()
+     },[props.isAuth])
+      const { isAuth } = props;
       if (!isAuth) {
         return <Login />
         // return <Redirect to="/login"/>;
       } else {
-        return <Component {...this.props} />;
+        return <Component {...props} />;
       }
-    }
   }
 
-  return connect(mapStateToPropsForRedirect)(RedirectComponent);
+  return connect(mapStateToPropsForRedirect, {checkAuth})(RedirectComponent);
 };
 export default withAuthRedirect;

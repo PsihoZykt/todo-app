@@ -15,7 +15,7 @@ const TaskContentContainer = props => {
   const onSubtaskRemoved = (task, id) => {
     props.removeSubtask(task, id);
   };
-  console.log(props)
+
   const { id } = match.params;
   const task = tasks.find(t => t.id === id);
 
@@ -23,7 +23,6 @@ const TaskContentContainer = props => {
     return null
   } else {
     const subTasks = mapArrayToElements(task.subTasks, SubTask, task, onChecked, onSubtaskRemoved);
-
     return <TaskContent task={task} subTasks={subTasks} onSubtaskAdded={onSubtaskAdded} />;
   }
 
@@ -31,10 +30,9 @@ const TaskContentContainer = props => {
 };
 
 const mapStateToProps = state => ({
-  tasks: state.navReducer.tasks,
 });
 export default connect(
-  mapStateToProps,
+  null,
   {
     addSubtask,
     toggleSubTaskChecked,

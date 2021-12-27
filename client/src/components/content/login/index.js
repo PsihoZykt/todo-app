@@ -1,3 +1,3 @@
-import LoginWrapper from './Login';
+import LoginContainer from './Login';
 
-export default LoginWrapper;
+export default LoginContainer;

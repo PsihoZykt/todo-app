@@ -20,7 +20,8 @@ exports.auth = (req, res) => {
     res.status(403)
       .send({
         user: null,
-        message: 'Need to log in' });
+        message: 'Need to log in'
+      });
   }
 };
 
@@ -28,11 +29,15 @@ exports.logout = (req, res) => {
   if (req.session.user) {
     delete req.session.user;
     res.status(200)
-      .send({ message: 'logout success' });
+      .send({
+        user: null,
+        message: 'logout success'
+      });
   }
 };
 
 exports.create = (req, res) => {
+  console.log('create route', req.body);
   createUser(req.body)
     .then((result) => {
       console.log(`result in createUser ${result}`);
@@ -46,12 +51,17 @@ exports.create = (req, res) => {
     .catch((err) => {
       console.log(err);
       res.status(500)
-        .send({ message: `Error in creating user. THe error is ${err}` });
+        .send({
+          user: null,
+          message: `Error in creating user. THe error is ${err}`,
+        });
     });
 };
 
 exports.login = (req, res, next) => {
-  if (req.session.user) {
+  console.log(req.body);
+  console.log(req.session);
+  if (req.session && req.session.user) {
     const user = {
       id: req.session.user._id,
       email: req.session.user.email,
@@ -66,6 +76,8 @@ exports.login = (req, res, next) => {
   }
   checkUser(req.body)
     .then((user) => {
+      console.log(user);
+      console.log(req.session)
       // if (user) {
       req.session.user = user;
       const newUser = {
@@ -76,14 +88,17 @@ exports.login = (req, res, next) => {
       res.status(200)
         .send({
           user: newUser,
-          message: 'Auth success',
+          message: 'Successful  login',
         });
       console.log('user is valid');
 
     })
-    .catch(e => res.status(403)
-      .send({
-        user: null,
-        message: e,
-      }));
+    .catch(e => {
+      console.log(e)
+      res.status(403)
+        .send({
+          user: null,
+          message: e,
+        })
+    });
 };

@@ -26,6 +26,8 @@
     "lodash.map": "^4.6.0",
     "prettier": "^1.18.2",
     "react": "^16.8.6",
+    "react-alert": "^7.0.3",
+    "react-alert-template-basic": "^1.0.2",
     "react-display-name": "^0.2.4",
     "react-dom": "^16.8.6",
     "react-redux": "^7.1.0",

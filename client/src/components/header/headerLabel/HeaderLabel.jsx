@@ -6,10 +6,9 @@ import s from './headerLabel.module.css';
 
 export default function HeaderLabel(props) {
   let {isAuth, currentUser, history, logout, location} = props;
-  console.log(props)
   return (
     <>
-      {isAuth && currentUser && <UserLabel location={location} currentUser={currentUser} logout={logout} />}
+      {isAuth && currentUser && <UserLabel clearTasks={props.clearTasks} location={location} currentUser={currentUser} logout={logout} />}
       <Route exact path="/login" render={() => <LoginLabel isAuth={isAuth} history={history} />} />
       <Route
         exact
@@ -45,11 +44,9 @@ const RegisterLabel = ({ isAuth, history }) => {
 };
 
 export const UserLabel = (props) => {
-  console.log(props.location)
   return (
     <>
        <div className="col">
-         {/*{ props.location && props.location.pathname.includes("/tasks") && <SearchForm initialValues={{ searchField: '' }} s /> }*/}
          {  <SearchForm initialValues={{ searchField: '' }} s /> }
       </div>
 
@@ -58,7 +55,7 @@ export const UserLabel = (props) => {
       </div>
       <div className="col">
         <span className={s.logout}>
-          <Logout logout={props.logout} />
+          <Logout logout={props.logout} clearTasks={props.clearTasks}/>
         </span>
       </div>
     </>
@@ -66,7 +63,6 @@ export const UserLabel = (props) => {
 };
 
 const SearchForm = reduxForm({ form: 'searchTask' })(props => {
-  console.log(props)
   return (
     <span>
       <Field

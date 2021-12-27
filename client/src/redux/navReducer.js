@@ -1,5 +1,6 @@
 import TodosAPI from '../api/TodosAPI';
 
+const CLEAR_TASKS = 'CLEAR_TASKS';
 const ADD_TASK = 'ADD_TASK';
 const REMOVE_TASK = 'REMOVE_TASK';
 const SET_TASKS = 'SET_TASKS';
@@ -11,6 +12,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+
     case SET_TASKS: {
       return {
         ...state,
@@ -61,6 +63,11 @@ export default (state = initialState, action) => {
         tasks: newTasks
       };
     }
+    case CLEAR_TASKS: {
+      return {
+        ...state,
+        tasks: [] };
+    }
 
     default:
       return state;
@@ -89,7 +96,9 @@ export const editTask = task => ({
   type: EDIT_TASK,
   task,
 });
-
+export const clearTasksState = () => ({
+  type: CLEAR_TASKS
+})
 // Thunks
 export const postTask = task => dispatch => {
   TodosAPI.postTodo(task)
@@ -118,16 +127,11 @@ export const deleteTask = task => dispatch => {
 export const toggleTaskActive = task => dispatch => {
   const newTask = { ...task };
   newTask.isActive = !task.isActive;
-  dispatch(toggleIsActive(newTask))
-  // // Update all todos, because I need to update isACtive in other todos
-  // TodosAPI.editTask(newTask)
-  //   .then(() => TodosAPI.getAllTodos().then(data => {
-  //     return dispatch(setTasks(data));
-  //   }),
-  //   )
-  //   .catch(err => console.log(err));
+  dispatch(toggleIsActive(newTask));
 };
-
+export const clearTasks = () => dispatch => {
+  dispatch(clearTasksState())
+}
 export const addSubtask = (task, label) => dispatch => {
   const newTask = { ...task };
   newTask.subTasks = [...task.subTasks];
@@ -142,6 +146,7 @@ export const addSubtask = (task, label) => dispatch => {
 };
 
 export const toggleSubTaskChecked = (task, id, isChecked) => dispatch => {
+
   const newTask = { ...task };
   newTask.subTasks = newTask.subTasks.map(subTask => {
     const newSubTask = { ...subTask };

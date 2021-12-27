@@ -3,15 +3,17 @@ import { Field, reduxForm } from 'redux-form';
 import s from './addSubTask.module.css';
 
 const AddSubTask = props => {
-  const { onSubtaskAdded, task } = props;
+  const {
+    onSubtaskAdded,
+    task
+  } = props;
   const onSubmit = formData => {
-
     onSubtaskAdded(task, formData.label);
   };
   return (
     <div className={s.inputWrapper}>
       <div className="input-group mb-3">
-        <AddSubTaskFormRedux onSubmit={onSubmit} />
+        <AddSubTaskFormRedux onSubmit={onSubmit}/>
       </div>
     </div>
   );
@@ -27,15 +29,18 @@ const AddSubTaskForm = props => {
         component="input"
         type="text"
         name="label"
+        required
         className="form-control"
         placeholder="SubTask name"
         aria-label="SubTask name"
         aria-describedby="basic-addon2"
       />
+      {/*<Field name="subTaskContent" component={renderField} aria-label="subTask" type="text"*/}
+      {/*       className="form-control" placeholder="Subtask name" aria-describedby="basic-addon2"/>*/}
       <div className="input-group-append">
         <button type="submit" className={s.invisibleButton}>
           <span className={`input-group-text ${s.addonInForm}`} id="basic-addon2">
-            <i className="fa fa-check-circle-o" />
+            <i className="fa fa-check-circle-o"/>
           </span>
         </button>
       </div>

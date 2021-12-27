@@ -15,6 +15,7 @@ const App = () => (
       <Route exact path="/login" render={() => <Login/>}/>
       <Route exact path="/register" render={() => <RegisterPage/>}/>
       <Route path="/tasks" render={() => <Content/>}/>
+      {/*//TODO: i guess i should refactor this*/}
       <Route exact path="/" render={() => <Content/>}/>
 
     </div>

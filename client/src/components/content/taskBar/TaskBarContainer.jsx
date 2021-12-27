@@ -12,42 +12,36 @@ const TaskBarContainer = props => {
   const { tasks } = props;
   const [filteredTasks, setFilteredTasks] = useState([...tasks]);
   useEffect(() => {
+    if (!tasks) return <Login/>;
+
     let filter = '';
     if (props.searchField) filter = props.searchField;
     setFilteredTasks(
       tasks.filter(task => {
-        if (task.name.search(filter) !== -1) return true;
-        return false;
+        return task.name.search(filter) !== -1;
       }),
     );
-  }, [props]);
-
-  useEffect(() => {
-    if (!tasks) return <Login />;
-    // tasks.forEach(task => {
-    //   if (task.isActive) {
-    //     props.history.push(`/tasks/id/${task.id}`);
-    //     return null;
-    //   }
-    // });
   }, [props.tasks]);
+console.log(filteredTasks)
 
   const onTaskClick = task => props.toggleTaskActive(task);
   const onTaskAdded = task => props.postTask(task);
   const onTaskRemoved = task => props.deleteTask(task);
 
-  const taskElements = mapArrayToElements(filteredTasks, Task, onTaskClick, onTaskRemoved);
-
+  // const taskElements = mapArrayToElements(filteredTasks, Task, onTaskClick, onTaskRemoved);
+ const taskElements = filteredTasks.map(task => {
+ return  <Task task={task} key={task.id} onTaskClick={onTaskClick} onTaskRemoved={onTaskRemoved}/>
+ })
   return (
     <>
-      <TaskBar taskElements={taskElements} onTaskAdded={onTaskAdded} />{' '}
+      <TaskBar taskElements={taskElements} onTaskAdded={onTaskAdded}/>{' '}
     </>
   );
 };
 const selector = formValueSelector('searchTask');
 
 const mapStateToProps = state => ({
-  tasks: state.navReducer.tasks,
+  isAuth: state.authReducer.isAuth,
   searchField: selector(state, 'searchField'),
 });
 export default connect(

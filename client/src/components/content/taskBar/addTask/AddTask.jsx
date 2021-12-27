@@ -22,6 +22,7 @@ const AddTaskForm = props => {
         component="input"
         className="form-control"
         placeholder="Task name"
+        required
         aria-label="Task name"
         aria-describedby="basic-addon2"
         name="newTaskBody"

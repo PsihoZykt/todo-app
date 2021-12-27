@@ -1,3 +1,3 @@
-import RegisterPageWrapper from './RegisterPage';
+import RegisterPageContainer from './RegisterPage';
 
-export default RegisterPageWrapper;
+export default RegisterPageContainer;

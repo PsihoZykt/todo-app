@@ -4,30 +4,37 @@ const APPLICATION_JSON = 'application/json';
 
 const UsersAPI = {
   createUser(username, email, password) {
-    const data = {
-      username,
-      email,
-      password,
-    };
-    return instance.post('/api/register', data);
-  },
-  login(username, email, password) {
     const userData = {
       username,
       email,
       password,
     };
-    return instance.post('/api/login', userData).then(response => response.data.user)
+    console.log(userData)
+    return instance.post('/api/user/register', userData).catch(err => {
+      throw err.response.data
+    });
+  },
+  login(username, email, password) {
+    const userData = {
+      email,
+      username,
+      password,
+    };
+    console.log(userData)
+    return instance.post('/api/user/login', userData).then(response => response.data)
       .catch((err) => {
         throw err.response.data
       });
   },
+
   logout() {
-    return instance.delete('/api/logout').then(response => response.data);
+    return instance.delete('/api/user/logout').then(response => response.data);
   },
 
   isAuth() {
-    return instance.get('/api/auth').then(response => response.data);
+    return instance.get('/api/user/auth').then(response => response.data).catch(err => {
+      return err.response.data
+    });
   },
 };
 

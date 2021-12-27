@@ -9,11 +9,6 @@ const todoSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  isActive: {
-    type: Boolean,
-    required: false,
-    default: false,
-  },
   subTasks: [
     {
       label: {
