@@ -1,7 +1,5 @@
 import * as axios from 'axios';
-
-const LOCALHOST_URL = 'http://localhost:3005';
-const HEROKU_URL = 'https://psihozykt-todo-app.herokuapp.com';
+const baseURL = process.env.NODE_ENV === "production" ? "https://psihozykt-todo-app.herokuapp.com":"http://localhost:3005"
 const instance = axios.create({
   // withCredentials: true,
   //   headers: {
@@ -9,7 +7,7 @@ const instance = axios.create({
   //   },
 
   // baseURL: LOCALHOST_URL,
-  baseURL: HEROKU_URL,
+  baseURL: baseURL,
 });
 
 export default instance;

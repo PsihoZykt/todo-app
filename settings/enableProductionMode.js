@@ -9,5 +9,5 @@ module.exports = (app) => {
       res.sendFile(index);
     });
   }
-  console.log(`App started in [${process.env.NODE_ENV}] mode`);
+  console.log(`App started in [${process.env.MODE}] mode`);
 };

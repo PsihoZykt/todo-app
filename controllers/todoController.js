@@ -4,6 +4,7 @@ const getTodo = require('./util/todo');
 const Todo = require('../models/todoModel');
 // Handle index actions
 exports.index = (req, res) => {
+  console.log(req.session.user)
   Todo.find({ uid: req.session.user._id }, (err, todos) => {
     if (err) {
       console.log('Todos werent found. Error' + err);

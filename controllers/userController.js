@@ -5,6 +5,7 @@ const {
 // User API
 
 exports.auth = (req, res) => {
+ console.log(req.session.user)
   if (req.session.user) {
     const user = {
       id: req.session.user._id,
@@ -59,8 +60,7 @@ exports.create = (req, res) => {
 };
 
 exports.login = (req, res, next) => {
-  console.log(req.body);
-  console.log(req.session);
+
   if (req.session && req.session.user) {
     const user = {
       id: req.session.user._id,
@@ -76,15 +76,13 @@ exports.login = (req, res, next) => {
   }
   checkUser(req.body)
     .then((user) => {
-      console.log(user);
-      console.log(req.session)
       // if (user) {
-      req.session.user = user;
       const newUser = {
-        id: user._id,
+        _id: user._id,
         email: user.email,
         username: user.username,
       };
+      req.session.user = newUser;
       res.status(200)
         .send({
           user: newUser,

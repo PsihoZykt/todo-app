@@ -46,7 +46,7 @@ export const deleteUserSession = () => ({
 export const login = (username, email, password) => dispatch => {
   return UsersAPI.login(username, email, password)
     .then((res) => {
-      console.log(res)
+      console.log('loginThink', res)
       // if (res.user !== null) {
         dispatch(setUserSession(res.user));
       // } else {
@@ -80,6 +80,7 @@ export const createUser = (username, email, password) => dispatch => {
 };
 export const checkAuth = () => dispatch => UsersAPI.isAuth()
   .then((res) => {
+    console.log('authReducer, checkAuth', res)
     if (res.user !== null) {
       return dispatch(setUserSession(res.user));
     } else {

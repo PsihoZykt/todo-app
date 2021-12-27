@@ -9,9 +9,9 @@ const app = express();
 try {
   // The order is important, don't break the order! But should fix this
   connectToDB(app);
+  initiateCors(app);
   setupRoutes(app);
   enableProductionMode(app);
-  initiateCors(app);
   startApp(app);
 } catch (e) {
   console.log(e);

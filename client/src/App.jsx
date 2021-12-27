@@ -7,20 +7,24 @@ import store from './redux/store';
 import Login from './components/content/login/Login';
 import RegisterPage from './components/content/register/RegisterPage';
 
-const App = () => (
-  // <React.StrictMode>
-  <Provider store={store}>
-    <div className="container-fluid">
-      <Header/>
-      <Route exact path="/login" render={() => <Login/>}/>
-      <Route exact path="/register" render={() => <RegisterPage/>}/>
-      <Route path="/tasks" render={() => <Content/>}/>
-      {/*//TODO: i guess i should refactor this*/}
-      <Route exact path="/" render={() => <Content/>}/>
+const App = () => {
+  console.log(process.env)
+  return (
 
-    </div>
-  </Provider>
-  // </React.StrictMode>
-);
+    // <React.StrictMode>
+    <Provider store={store}>
+      <div className="container-fluid">
+        <Header/>
+        <Route exact path="/login" render={() => <Login/>}/>
+        <Route exact path="/register" render={() => <RegisterPage/>}/>
+        <Route path="/tasks" render={() => <Content/>}/>
+        {/*//TODO: i guess i should refactor this*/}
+        <Route exact path="/" render={() => <Content/>}/>
+
+      </div>
+    </Provider>
+    // </React.StrictMode>
+  );
+};
 
 export default App;
