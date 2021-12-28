@@ -1,6 +1,6 @@
 import * as axios from 'axios';
-// const baseURL = "https://psihozykt-todo-app.herokuapp.com"
-const baseURL = "http://localhost:3005"
+const baseURL = "https://psihozykt-todo-app.herokuapp.com"
+// const baseURL = "http://localhost:3005"
 const instance = axios.create({
   // withCredentials: true,
   //   headers: {
