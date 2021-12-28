@@ -28,7 +28,7 @@ Express based server with sessions for authentication with mongoDB as database.
 
 Passwords encrypted with sha1 algorithm
 
-#Features
+# Features
 
 Register, login, authentication via sessions
 
@@ -44,7 +44,7 @@ Task filtering
 
 And may be some other stuff I forgot to mention
 
-#Planned features 
+# Planned features 
 
 Email validation and some UI changes
 # Showcases
