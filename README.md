@@ -1,4 +1,5 @@
-#General
+# General
+
 It was assumed to be a simple todo app 
 with simple server side on express, but when i returned to this project
 I realized that I can't handle all  these layers of complexity 
@@ -48,3 +49,4 @@ And may be some other stuff I forgot to mention
 Email validation and some UI changes
 # Showcases
 
+https://user-images.githubusercontent.com/34924425/147525504-d00577ce-be6b-44b0-8646-a37904a5dd3d.mp4
