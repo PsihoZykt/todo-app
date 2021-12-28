@@ -2,12 +2,7 @@ import React from 'react';
 import s from './subTask.module.css';
 
 const SubTask = props => {
-  const {
-    subtask: { label, id, isChecked },
-    children,
-  } = props;
-
-  const [task, onChecked, onSubtaskRemoved] = children;
+  const {task, label, id, isChecked, onChecked, onSubtaskRemoved} = props;
 
   return (
     <span

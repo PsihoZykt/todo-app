@@ -44,7 +44,7 @@ const TodosAPI = {
   },
 
   deleteTodo(task) {
-    return instance.delete(`/api/todos/${task.id}`).then(response => response.data);
+    return instance.delete(`/api/todo/${task.id}`).then(response => response.data);
   },
 
   editTask(task) {

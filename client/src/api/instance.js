@@ -1,5 +1,6 @@
 import * as axios from 'axios';
-const baseURL = process.env.NODE_ENV === "production" ? "https://psihozykt-todo-app.herokuapp.com":"http://localhost:3005"
+// const baseURL = "https://psihozykt-todo-app.herokuapp.com"
+const baseURL = "http://localhost:3005"
 const instance = axios.create({
   // withCredentials: true,
   //   headers: {

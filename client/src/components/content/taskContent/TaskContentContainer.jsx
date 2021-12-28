@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { addSubtask, toggleSubTaskChecked, removeSubtask } from '../../../redux/navReducer';
 import SubTask from './subTask';
 import TaskContent from './TaskContent';
-import mapArrayToElements from '../../../util/utility';
 
 const TaskContentContainer = props => {
   const { tasks, match } = props;
@@ -22,7 +21,9 @@ const TaskContentContainer = props => {
   if (!id || !task) {
     return null
   } else {
-    const subTasks = mapArrayToElements(task.subTasks, SubTask, task, onChecked, onSubtaskRemoved);
+    const subTasks = task.subTasks.map(subTask => {
+      return <SubTask  label={subTask.label} id={subTask.id} isChecked={subTask.isChecked} onChecked={onChecked} onSubtaskRemoved={onSubtaskRemoved} />
+    })
     return <TaskContent task={task} subTasks={subTasks} onSubtaskAdded={onSubtaskAdded} />;
   }
 
