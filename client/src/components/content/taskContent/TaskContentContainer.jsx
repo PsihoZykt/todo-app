@@ -12,6 +12,7 @@ const TaskContentContainer = props => {
     props.addSubtask(task, label);
   };
   const onSubtaskRemoved = (task, id) => {
+    console.log("onSubTaskRemoved", task, id)
     props.removeSubtask(task, id);
   };
 
@@ -22,7 +23,7 @@ const TaskContentContainer = props => {
     return null
   } else {
     const subTasks = task.subTasks.map(subTask => {
-      return <SubTask  label={subTask.label} id={subTask.id} isChecked={subTask.isChecked} onChecked={onChecked} onSubtaskRemoved={onSubtaskRemoved} />
+      return <SubTask task={task} label={subTask.label} id={subTask.id} isChecked={subTask.isChecked} onChecked={onChecked} onSubtaskRemoved={onSubtaskRemoved} />
     })
     return <TaskContent task={task} subTasks={subTasks} onSubtaskAdded={onSubtaskAdded} />;
   }

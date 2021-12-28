@@ -3,7 +3,8 @@ import s from './subTask.module.css';
 
 const SubTask = props => {
   const {task, label, id, isChecked, onChecked, onSubtaskRemoved} = props;
-
+  console.log(onChecked)
+  console.log(onSubtaskRemoved)
   return (
     <span
       className={`${s.subTask} list-group-item  d-flex justify-content-between align-items-center
